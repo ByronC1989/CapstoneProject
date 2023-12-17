@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>MediRecord - Register User</title>
+</head>
+<body>
+	<h1>MediRecord</h1>
+	
+	<h2>User Registration</h2>
+	
+	<em>{0}</em><br><br>	
+	
+	<form action='register' method='post'>
+		<label for='username'>Username:</label>
+		<input type='text' id='username' name='username'><br>
+		
+		<label for='firstname'>First name:</label>
+		<input type='text' id='firstname' name='firstname'><br>
+		
+		<label for='lastname'>Last name:</label>
+		<input type='text' id='lastname' name='lastname'><br>
+		
+		<label for='email'>Email:</label>
+		<input type='text' id='email' name='email'><br>
+		
+		<label for='password'>Password:</label>
+		<input type='password' id='password' name='password'><br>
+		
+		<!-- hidden value sets user to unverified by default -->
+		<input type='hidden' id='verifieduser' name='verifieduser' value='0'><br>
+		
+		<input type='submit' value='Register User!'>
+	</form>
+	
+
+</body>
+</html>
