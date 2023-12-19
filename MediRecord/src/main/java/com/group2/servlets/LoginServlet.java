@@ -3,7 +3,6 @@ package com.group2.servlets;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.MessageFormat;
 
 import javax.servlet.ServletException;

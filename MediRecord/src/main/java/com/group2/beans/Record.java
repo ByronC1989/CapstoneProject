@@ -17,37 +17,37 @@ public class Record {
 	
 	
 	// constructor for entering new patient with no diagnoses, or allergy information
-	Record(String healthCardID, String firstName, String lastName, String gender, String dateOfBirth, Date createDate) {
+	public Record(String healthCardID, String firstName, String lastName, String gender, String dateOfBirth, Date createDate) {
 		this.healthCardID = healthCardID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
-		this.setCreateDate(createDate); 
+		this.createDate = createDate;
 		
 	}
 	
 	// constructor for entering patient with no allergies.
-	Record(String healthCardID, String firstName, String lastName, String gender, String dateOfBirth, String diagnoses, Date createDate) {
+	public Record(String healthCardID, String firstName, String lastName, String gender, String dateOfBirth, String diagnoses, Date createDate) {
 		this.healthCardID = healthCardID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.diagnoses = diagnoses;
-		this.setCreateDate(createDate);
+		this.createDate = createDate;
 		
 	}
 	
 	// constructor for entering patient with allergies and diagnoses
-	Record(String healthCardID, String firstName, String lastName, String gender, String dateOfBirth, String allergies, String diagnoses, Date createDate) {
+	public Record(String healthCardID, String firstName, String lastName, String gender, String dateOfBirth, String allergies, String diagnoses, Date createDate) {
 		this.healthCardID = healthCardID;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
 		this.diagnoses = diagnoses;
-		this.setCreateDate(createDate);
+		this.createDate = createDate;
 		
 	}
 	

@@ -50,11 +50,11 @@ public class RegisterServlet extends HttpServlet {
 		String lastName = req.getParameter("lastname");
 		String email = req.getParameter("email");
 		String password = req.getParameter("password");
-		int verified = Integer.parseInt( req.getParameter("verifieduser"));
+		int verified = Integer.parseInt( req.getParameter("verifieduser")); // to be used to check if users are verified
 		
 		String message = "";
 		
-		// check if username or email already exist in the database
+		// check if user name or email already exist in the database
 		if(dao.verifyUsername(username) || dao.verifyEmail(email)) {
 			
 			// if they do exists display an error message based on which one exists

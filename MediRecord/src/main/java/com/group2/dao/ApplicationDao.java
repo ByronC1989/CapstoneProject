@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.group2.user.User;
+import com.group2.beans.Record;
 
 // This Class can perform all Database CRUD Operations
 public class ApplicationDao {
@@ -133,23 +134,23 @@ public class ApplicationDao {
 	}
 	
 	
-	// adding user to the database.
+	// adding patient record to the database.
 	public void createPost(Record record) {
 				
 		try {
-			// UUID, username, first name , last name, password, email, verifieduser, role 
+			// healthcard#, firstname, lastname, gender, dateOfBirth, creationDate, allergies, Diagnoses
 			String insertQuery = "INSERT INTO records VALUES(?,?,?,?,?,?,?,?)";
 			
 			// set parameters
 			java.sql.PreparedStatement statement = connection.prepareStatement(insertQuery);
-			//statement.setString(1, user.getUserID().toString());
-			//statement.setString(2, user.getUserName());
-			//statement.setString(3, user.getFirstName());
-			//statement.setString(4, user.getLastName());
-			//statement.setString(5, user.getPassword());
-			//statement.setString(6, user.getEmail());
-		   // statement.setInt(7, 0); // handling verified users
-			//statement.setString(8, user.getTestRole() ); // replace with role
+			statement.setString(1, record.getHealthCardID());
+		    statement.setString(2, record.getFirstName());
+			statement.setString(3, record.getLastName());
+			statement.setString(4, record.getGender());
+			statement.setString(5, record.getDateOfBirth());
+			statement.setDate(6, record.getCreateDate());
+		    statement.setString(7, record.getAllergies());
+			statement.setString(8, record.getDiagnoses()); 
 			
 			// execute statement
 			statement.execute();
