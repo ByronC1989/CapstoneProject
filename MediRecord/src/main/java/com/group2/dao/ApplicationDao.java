@@ -3,6 +3,9 @@ package com.group2.dao;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.group2.user.User;
 import com.group2.beans.Record;
@@ -158,6 +161,43 @@ public class ApplicationDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 	
+	}
+	
+	// search for patient records to be displayed
+	public List<Record> searchRecords(String search){
+		Record record = null;
+		List<Record> records = new ArrayList<>();
+		
+		try {
+			String sql = "SELECT * FROM records WHERE HealthcardID="+ search;
+			
+			Statement statement = connection.createStatement();
+			
+			statement.executeQuery(sql);
+			
+			ResultSet set = statement.executeQuery(sql);
+			
+			
+			while(set.next()) {
+				record = new Record();
+				record.setHealthCardID(set.getString("HealthcardID"));
+				record.setFirstName(set.getString("FirstName"));
+				record.setLastName(set.getString("LastName"));
+				record.setGender(set.getString("Gender"));
+				record.setDateOfBirth(set.getString("DateOfBirth"));
+				record.setAllergies(set.getString("Allergies"));
+				record.setDiagnoses(set.getString("Diagnoses"));
+				
+				records.add(record);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
+
+		
+		return records;
+		
 	}
 
 }

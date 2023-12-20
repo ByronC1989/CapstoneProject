@@ -16,6 +16,10 @@ public class Record {
 	private String diagnoses;
 	
 	
+	public Record() {
+		
+	}
+	
 	// constructor for entering new patient with no diagnoses, or allergy information
 	public Record(String healthCardID, String firstName, String lastName, String gender, String dateOfBirth, Date createDate) {
 		this.healthCardID = healthCardID;
