@@ -50,6 +50,7 @@ public class Record {
 		this.lastName = lastName;
 		this.gender = gender;
 		this.dateOfBirth = dateOfBirth;
+		this.allergies = allergies;
 		this.diagnoses = diagnoses;
 		this.createDate = createDate;
 		

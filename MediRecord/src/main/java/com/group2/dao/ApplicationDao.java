@@ -169,7 +169,7 @@ public class ApplicationDao {
 		List<Record> records = new ArrayList<>();
 		
 		try {
-			String sql = "SELECT * FROM records WHERE HealthcardID="+ search;
+			String sql = "SELECT * FROM records WHERE HealthcardID=" + search;
 			
 			Statement statement = connection.createStatement();
 			
