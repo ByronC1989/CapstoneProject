@@ -179,6 +179,7 @@ public class ApplicationDao {
 			
 			
 			while(set.next()) {
+				// create record object from database
 				record = new Record();
 				record.setHealthCardID(set.getString("HealthcardID"));
 				record.setFirstName(set.getString("FirstName"));
@@ -188,6 +189,7 @@ public class ApplicationDao {
 				record.setAllergies(set.getString("Allergies"));
 				record.setDiagnoses(set.getString("Diagnoses"));
 				
+				// add records to arraylist
 				records.add(record);
 			}
 			
