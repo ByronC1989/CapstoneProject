@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.group2.dao.ApplicationDao;
 
-@WebServlet("/patientrecord")
+@WebServlet("/records")
 public class RecordServlet extends HttpServlet{
 
 	/**
@@ -30,8 +30,10 @@ public class RecordServlet extends HttpServlet{
 		// Servlet for handling Record Lists
 		System.out.println("Inside Record Servlet doGet method");
 		
+		// add search bar to display record on page --- remove directory page
+		
 		// Display html page from get request
-		String page = getHTMLString(req.getServletContext().getRealPath("patientrecord.html"), " ");		
+		String page = getHTMLString(req.getServletContext().getRealPath("patientrecord.html"), " ");	
 		resp.getWriter().write(page);
 	}
 	

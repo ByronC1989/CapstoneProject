@@ -19,6 +19,11 @@
 		</nav>
 
         <h2>Patient Record</h2>
+        <form class="login-form" action='records' method='post'>
+            <label for='healthcard'>Health Card #:</label>
+            <input type='text' id='healthcard' name='healthcard' maxlength='10' required>
+            <button type='submit'>Submit Patient Record</button>
+        </form>
         
         <h3>Patient Info</h3>
         <p>Health Card #: {0}</p>

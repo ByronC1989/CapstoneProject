@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.group2.dao.ApplicationDao;
 
-@WebServlet("/records")
+@WebServlet("/recordstest")
 public class RecordDirectoryServlet extends HttpServlet {
 
 	/**
