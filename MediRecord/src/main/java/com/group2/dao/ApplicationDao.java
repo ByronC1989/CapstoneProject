@@ -9,9 +9,10 @@ import java.util.List;
 
 import com.group2.user.User;
 import com.group2.beans.Record;
+import com.group2.services.ApplicationServices;
 
 // This Class can perform all Database CRUD Operations
-public class ApplicationDao {
+public class ApplicationDao implements ApplicationServices{
 	
 	// Variable for holding connection 
 	private Connection connection = null;
