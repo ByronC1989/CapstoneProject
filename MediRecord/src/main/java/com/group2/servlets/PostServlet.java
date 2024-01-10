@@ -13,7 +13,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.group2.beans.Record;
+import com.group2.beans.RecordBuilder;
 import com.group2.dao.ApplicationDao;
+import com.group2.dao.DaoProxy;
+import com.group2.services.ApplicationServices;
 
 @WebServlet("/post")
 public class PostServlet extends HttpServlet {
@@ -24,7 +27,8 @@ public class PostServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// create instances of ApplicationDAO to manage CRUD operations
-	ApplicationDao dao = new ApplicationDao();
+	//ApplicationDao dao = new ApplicationDao();
+	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -55,14 +59,18 @@ public class PostServlet extends HttpServlet {
 		// add health card validation --- check if health card already exists in the system
 		
 		// create a creation date
-		long currentTime=System.currentTimeMillis();
+		long currentTime = System.currentTimeMillis();
 		Date createDate = new Date(currentTime);
 		
 		// create record object from form data
-		Record record = new Record(healthCard, firstName, lastName, gender, dateOfBirth, allergies, diagnoses, createDate);
+		//Record record = new Record(healthCard, firstName, lastName, gender, dateOfBirth, allergies, diagnoses, createDate);
+		
+		Record record = new RecordBuilder().setHealthCardID(healthCard).setFirstName(firstName).setLastName(lastName).setGender(gender)
+				.setDateOfBirth(dateOfBirth).setAllergies(allergies).setDiagnoses(diagnoses).setCreateDate(createDate).getRecord();
 		
 		// add record to database
-		dao.createPost(record);
+		//dao.createPost(record);
+		daoProxy.createPost(record);
 		
 		
 		// Display html page from post request

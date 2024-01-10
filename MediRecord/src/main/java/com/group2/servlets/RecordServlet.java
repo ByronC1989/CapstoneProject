@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.group2.dao.ApplicationDao;
+import com.group2.dao.DaoProxy;
+import com.group2.services.ApplicationServices;
 import com.group2.beans.Record;
 
 @WebServlet("/records")
@@ -24,7 +26,8 @@ public class RecordServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
 	// create instances of ApplicationDAO to manage CRUD operations
-	ApplicationDao dao = new ApplicationDao();
+	//ApplicationDao dao = new ApplicationDao();
+	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -44,19 +47,18 @@ public class RecordServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		String searchString = req.getParameter("healthcard");
+		
+		// added check if record exists in database
+		
 		// Might not need a List to hold records.
-		List<Record> records = dao.searchRecords(searchString);		
+		List<Record> records = daoProxy.searchRecords(searchString);		
 		
 		System.out.println(searchString);
 		
 		System.out.println(records.toString());
 		
-		// Display html page from get request
-		//String page = getHTMLString(req.getServletContext().getRealPath("patientrecord.html"));	
-		//resp.getWriter().write(page);
 		
-		
-		// Display html page from get request
+		// Display html page from post request
 		String page = getHTMLresult(req.getServletContext().getRealPath("patientrecord.html"), records);	
 		resp.getWriter().write(page);
 		

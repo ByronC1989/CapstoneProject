@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.group2.dao.ApplicationDao;
+import com.group2.dao.DaoProxy;
+import com.group2.services.ApplicationServices;
 
 
 
@@ -24,7 +26,8 @@ public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// create instances of ApplicationDAO to manage CRUD operations
-	ApplicationDao dao = new ApplicationDao();
+	//ApplicationDao dao = new ApplicationDao();
+	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -50,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		String message = "";
 		
 		// check username and password against the database
-		if(dao.verifyUsernamePassword(username, password)) {
+		if(daoProxy.verifyUsernamePassword(username, password)) {
 			// display successfully login message
 			message = "Succesfully Logged In!";
 			System.out.println("Succesfully Logged In!");

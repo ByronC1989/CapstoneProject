@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.group2.dao.ApplicationDao;
+import com.group2.dao.DaoProxy;
+import com.group2.services.ApplicationServices;
 import com.group2.user.User;
+import com.group2.user.UserBuilder;
 
 
 @WebServlet("/register")
@@ -24,7 +27,8 @@ public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	// create instances of ApplicationDAO to manage CRUD operations
-	ApplicationDao dao = new ApplicationDao();
+	//ApplicationDao dao = new ApplicationDao();  
+	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -39,13 +43,15 @@ public class RegisterServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		User user = null;
+//		User user = null;
+		
+		User userbuild = null;
 		
 		// register.html accesses register servlet doPost
 		System.out.println("Inside Register Servlet doPost!");
 		
 		// collect form data into variables.
-		String username = req.getParameter("username");
+		String username = req.getParameter("username"); 
 		String firstName = req.getParameter("firstname");
 		String lastName = req.getParameter("lastname");
 		String email = req.getParameter("email");
@@ -55,14 +61,14 @@ public class RegisterServlet extends HttpServlet {
 		String message = "";
 		
 		// check if user name or email already exist in the database
-		if(dao.verifyUsername(username) || dao.verifyEmail(email)) {
+		if(daoProxy.verifyUsername(username) || daoProxy.verifyEmail(email)) {
 			
 			// if they do exists display an error message based on which one exists
-			if(dao.verifyUsername(username)) {
+			if(daoProxy.verifyUsername(username)) {
 				
 				message = "That Username already exists!";
 				
-			} else if(dao.verifyEmail(email)) {
+			} else if(daoProxy.verifyEmail(email)) {
 				
 				message = "That Email already exists!";
 				
@@ -71,15 +77,23 @@ public class RegisterServlet extends HttpServlet {
 		} else {
 			
 			// create user
-			user = new User();
-			user.setUserName(username);
-			user.setFirstName(firstName);
-			user.setLastName(lastName);
-			user.setEmail(email);
-			user.setPassword(password);
+			
+			// No longer needed using builder pattern
+//			user = new User();
+//			user.setUserName(username);
+//			user.setFirstName(firstName);
+//			user.setLastName(lastName);
+//			user.setEmail(email);
+//			user.setPassword(password);
+			
+			userbuild = new UserBuilder().setUserName(username).setFirstName(firstName)
+					.setLastName(lastName).setEmail(email).setPassword(password).getUser();
 			
 			// Store account information inside of database
-			dao.createUser(user);
+//			dao.createUser(user);
+			
+			// using builder Pattern
+			daoProxy.createUser(userbuild);
 			
 		}
 						
