@@ -202,5 +202,34 @@ public class ApplicationDao implements ApplicationServices{
 		return records;
 		
 	}
+	
+	// check if a record exists in the system.
+	public boolean verifyRecord(String healthCardID) {
+		boolean match = false;
+		
+		String sql = "SELECT * FROM records WHERE HealthcardID=?";
+		
+		try {
+			
+			// set parameters
+			java.sql.PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, healthCardID);
+			
+			// execute statement
+			ResultSet set = statement.executeQuery();
+			
+			// check if a match was found
+			if (set.next()) {
+				match = true;
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return match;
+		
+	}
 
 }
