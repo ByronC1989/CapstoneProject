@@ -14,6 +14,7 @@ public interface ApplicationServices {
 	public boolean verifyUsername(String username);
 	public boolean verifyEmail(String email);
 	public boolean verifyUsernamePassword(String username, String password);
+	public User selectUser(String username);
 	
 	
 	// Record Operations

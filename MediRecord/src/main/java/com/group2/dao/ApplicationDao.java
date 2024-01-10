@@ -48,6 +48,43 @@ public class ApplicationDao implements ApplicationServices{
 		} 	
 	}
 	
+	
+	// pull user from database.
+	public User selectUser(String username) {
+		User user = null;
+		
+		String sql = "SELECT * FROM users WHERE username=?";
+		
+		try {
+			
+			// set parameters
+			java.sql.PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, username);
+			
+			// execute statement
+			ResultSet set = statement.executeQuery();
+			
+			// check if a match was found
+			if (set.next()) {
+				// create record object from database
+				user = new User();
+				user.setUserName(set.getString("Username"));
+				user.setFirstName(set.getString("FirstName"));
+				user.setLastName(set.getString("LastName"));
+				user.setPassword(set.getString("Password"));
+				user.setEmail(set.getString("Email"));
+				//user.setVerifiedUser(set.getString("verifiedUser"));			
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+		
+	}
+	
 	// check if a username already exists in the system.
 	public boolean verifyUsername(String username) {
 		boolean match = false;
