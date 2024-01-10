@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
 import com.group2.services.HtmlManager;
+import com.group2.user.User;
 
 
 
@@ -59,9 +60,12 @@ public class LoginServlet extends HttpServlet {
 			message = "Succesfully Logged In!";
 			System.out.println("Succesfully Logged In!");
 			
+			// create user object to pass information around
+			User user = daoProxy.selectUser(username);
+						
 			// create session once logged in
 			HttpSession session = req.getSession();
-			session.setAttribute("User", username);
+			session.setAttribute("User", user);
 			
 //			resp.sendRedirect("index.html"); // redirect user back to welcome page
 			
