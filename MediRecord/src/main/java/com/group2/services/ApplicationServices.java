@@ -19,5 +19,6 @@ public interface ApplicationServices {
 	// Record Operations
 	public void createPost(Record record);
 	public List<Record> searchRecords(String search);
+	public boolean verifyRecord(String healthCardID);
 	
 }

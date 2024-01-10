@@ -42,6 +42,11 @@ public class DaoProxy implements ApplicationServices {
 	public List<Record> searchRecords(String search) {
 		return dao.searchRecords(search);
 	}
+
+	@Override
+	public boolean verifyRecord(String healthCardID) {
+		return dao.verifyRecord(healthCardID);
+	}
 	
 	
 }
