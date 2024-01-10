@@ -54,18 +54,27 @@ public class RecordServlet extends HttpServlet{
 		String searchString = req.getParameter("healthcard");
 		
 		// add health card validation --- check if health card exists in the system
-		
-		// Might not need a List to hold records.
-		List<Record> records = daoProxy.searchRecords(searchString);		
-		
-		System.out.println(searchString);
-		
-		System.out.println(records.toString());
-		
-		
-		// Display html page from post request
-		String page = html.getHTMLresult(req.getServletContext().getRealPath("patientrecord.html"), records);	
-		resp.getWriter().write(page);
-		
+		if(daoProxy.verifyRecord(searchString)) {
+			
+			// Might not need a List to hold records.
+			List<Record> records = daoProxy.searchRecords(searchString);		
+			
+			System.out.println(searchString);
+			
+			System.out.println(records.toString());
+			
+			// Display html page from post request
+			String page = html.getHTMLresult(req.getServletContext().getRealPath("patientrecord.html"), records);	
+			resp.getWriter().write(page);
+			
+		} else {
+			
+			System.out.println("No record found!");
+			
+			// Display html page from get request
+			String page = html.getHTMLString(req.getServletContext().getRealPath("patientrecord.html"));	
+			resp.getWriter().write(page);
+		}
+			
 	}
 }

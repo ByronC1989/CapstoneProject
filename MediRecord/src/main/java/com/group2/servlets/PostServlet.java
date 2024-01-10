@@ -61,23 +61,30 @@ public class PostServlet extends HttpServlet {
 		String diagnoses = req.getParameter("diagnoses");
 		
 		// message to be displayed on success or error
-		String message = "Success!";
+		String message = "";
 		
 		// add health card validation --- check if health card already exists in the system
-		
-		// create a creation date
-		long currentTime = System.currentTimeMillis();
-		Date createDate = new Date(currentTime);
-		
-		// create record object from form data
-		//Record record = new Record(healthCard, firstName, lastName, gender, dateOfBirth, allergies, diagnoses, createDate);
-		
-		Record record = new RecordBuilder().setHealthCardID(healthCard).setFirstName(firstName).setLastName(lastName).setGender(gender)
-				.setDateOfBirth(dateOfBirth).setAllergies(allergies).setDiagnoses(diagnoses).setCreateDate(createDate).getRecord();
-		
-		// add record to database
-		//dao.createPost(record);
-		daoProxy.createPost(record);
+		if(!daoProxy.verifyRecord(healthCard)) {
+			message = "Success!";
+			
+			// create a creation date
+			long currentTime = System.currentTimeMillis();
+			Date createDate = new Date(currentTime);
+			
+			// create record object from form data
+			//Record record = new Record(healthCard, firstName, lastName, gender, dateOfBirth, allergies, diagnoses, createDate);
+			
+			Record record = new RecordBuilder().setHealthCardID(healthCard).setFirstName(firstName).setLastName(lastName).setGender(gender)
+					.setDateOfBirth(dateOfBirth).setAllergies(allergies).setDiagnoses(diagnoses).setCreateDate(createDate).getRecord();
+			
+			// add record to database
+			//dao.createPost(record);
+			daoProxy.createPost(record);
+			
+			
+		} else {
+			message = "Health Card already exists";
+		}
 		
 		
 		// Display html page from post request
