@@ -1,17 +1,14 @@
 package com.group2.servlets;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.MessageFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.group2.dao.ApplicationDao;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
 import com.group2.services.HtmlManager;
@@ -61,6 +58,13 @@ public class LoginServlet extends HttpServlet {
 			// display successfully login message
 			message = "Succesfully Logged In!";
 			System.out.println("Succesfully Logged In!");
+			
+			// create session once logged in
+			HttpSession session = req.getSession();
+			session.setAttribute("User", username);
+			
+//			resp.sendRedirect("index.html"); // redirect user back to welcome page
+			
 		} else {
 			// display failed to login message
 			message = "Either your username or password are incorrect";

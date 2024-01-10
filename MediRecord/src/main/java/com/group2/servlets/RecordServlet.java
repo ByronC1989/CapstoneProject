@@ -1,9 +1,6 @@
 package com.group2.servlets;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,8 +8,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.group2.dao.ApplicationDao;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
 import com.group2.services.HtmlManager;
@@ -39,8 +36,12 @@ public class RecordServlet extends HttpServlet{
 		// Servlet for handling Record Lists
 		System.out.println("Inside Record Servlet doGet method");
 		
-		// add search bar to display record on page --- remove directory page
-		
+		// manage sessions informations for access
+		HttpSession session = req.getSession();
+		if(session.getAttribute("User")==null) {
+			resp.sendRedirect("login");
+		}
+				
 		// Display html page from get request
 		String page = html.getHTMLString(req.getServletContext().getRealPath("patientrecord.html"));	
 		resp.getWriter().write(page);
@@ -52,7 +53,7 @@ public class RecordServlet extends HttpServlet{
 		
 		String searchString = req.getParameter("healthcard");
 		
-		// added check if record exists in database
+		// add health card validation --- check if health card exists in the system
 		
 		// Might not need a List to hold records.
 		List<Record> records = daoProxy.searchRecords(searchString);		

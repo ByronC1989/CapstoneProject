@@ -1,9 +1,6 @@
 package com.group2.servlets;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.MessageFormat;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.group2.dao.ApplicationDao;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
 import com.group2.services.HtmlManager;

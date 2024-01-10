@@ -1,9 +1,6 @@
 package com.group2.servlets;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
-import java.text.MessageFormat;
 import java.sql.Date;
 
 import javax.servlet.ServletException;
@@ -11,10 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.group2.beans.Record;
 import com.group2.beans.RecordBuilder;
-import com.group2.dao.ApplicationDao;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
 import com.group2.services.HtmlManager;
@@ -39,6 +36,12 @@ public class PostServlet extends HttpServlet {
 		
 		// Servlet for handling Posting Records
 		System.out.println("Inside Post Servlet doGet method");
+		
+		// manage sessions informations for access
+		HttpSession session = req.getSession();
+		if(session.getAttribute("User")==null) {
+			resp.sendRedirect("login");
+		}
 		
 		// Display html page from get request
 		String page = html.getHTMLString(req.getServletContext().getRealPath("post.html"), " ");		
