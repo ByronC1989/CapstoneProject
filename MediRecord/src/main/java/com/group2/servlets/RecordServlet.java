@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.group2.dao.ApplicationDao;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
+import com.group2.services.HtmlManager;
 import com.group2.beans.Record;
 
 @WebServlet("/records")
@@ -29,6 +30,9 @@ public class RecordServlet extends HttpServlet{
 	//ApplicationDao dao = new ApplicationDao();
 	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
+	// create instance of HtmlManager to write the html pages
+	HtmlManager html = new HtmlManager();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -38,7 +42,7 @@ public class RecordServlet extends HttpServlet{
 		// add search bar to display record on page --- remove directory page
 		
 		// Display html page from get request
-		String page = getHTMLString(req.getServletContext().getRealPath("patientrecord.html"));	
+		String page = html.getHTMLString(req.getServletContext().getRealPath("patientrecord.html"));	
 		resp.getWriter().write(page);
 	}
 	
@@ -59,57 +63,8 @@ public class RecordServlet extends HttpServlet{
 		
 		
 		// Display html page from post request
-		String page = getHTMLresult(req.getServletContext().getRealPath("patientrecord.html"), records);	
+		String page = html.getHTMLresult(req.getServletContext().getRealPath("patientrecord.html"), records);	
 		resp.getWriter().write(page);
 		
 	}
-	
-	private String getHTMLresult(String filePath, List<Record> records) throws IOException {
-		// read html page file and display the page.
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		String line = "";
-		StringBuffer buffer = new StringBuffer();
-		
-		while((line = reader.readLine()) != null) {
-			buffer.append(line);
-		}
-		
-		reader.close();
-		
-		String page = buffer.toString();
-		
-		// Add content by replacing placeholder values in html page.
-		// Add loop for List display
-		page = MessageFormat.format(page, records.get(0).getHealthCardID(), records.get(0).getFirstName(), 
-				records.get(0).getLastName(), records.get(0).getGender(), records.get(0).getDateOfBirth(),
-				records.get(0).getAllergies(), records.get(0).getDiagnoses());
-		
-		return page;
-	}
-
-
-	// Display HTML page
-	public String getHTMLString(String filePath) throws IOException {
-		// read html page file and display the page.
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		String line = "";
-		StringBuffer buffer = new StringBuffer();
-		
-		while((line = reader.readLine()) != null) {
-			buffer.append(line);
-		}
-		
-		reader.close();
-		
-		String page = buffer.toString();
-		
-		// Add content by replacing placeholder values in html page.
-		page = MessageFormat.format(page, " ", " ", " ", " "," "," "," ");
-		
-		return page;
-		
-	}
-	
-
-
 }

@@ -17,6 +17,7 @@ import com.group2.beans.RecordBuilder;
 import com.group2.dao.ApplicationDao;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
+import com.group2.services.HtmlManager;
 
 @WebServlet("/post")
 public class PostServlet extends HttpServlet {
@@ -30,6 +31,9 @@ public class PostServlet extends HttpServlet {
 	//ApplicationDao dao = new ApplicationDao();
 	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
+	// create instance of HtmlManager to write the html pages
+	HtmlManager html = new HtmlManager();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
@@ -37,7 +41,7 @@ public class PostServlet extends HttpServlet {
 		System.out.println("Inside Post Servlet doGet method");
 		
 		// Display html page from get request
-		String page = getHTMLString(req.getServletContext().getRealPath("post.html"), " ");		
+		String page = html.getHTMLString(req.getServletContext().getRealPath("post.html"), " ");		
 		resp.getWriter().write(page);
 	}
 	
@@ -74,30 +78,7 @@ public class PostServlet extends HttpServlet {
 		
 		
 		// Display html page from post request
-		String page = getHTMLString(req.getServletContext().getRealPath("post.html"), message);		
+		String page = html.getHTMLString(req.getServletContext().getRealPath("post.html"), message);		
 		resp.getWriter().write(page);
 	}
-	
-	// Display HTML page
-	public String getHTMLString(String filePath, String message) throws IOException {
-		// read html page file and display the page.
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		String line = "";
-		StringBuffer buffer = new StringBuffer();
-		
-		while((line = reader.readLine()) != null) {
-			buffer.append(line);
-		}
-		
-		reader.close();
-		
-		String page = buffer.toString();
-		
-		// Add content by replacing placeholder values in html page.
-		page = MessageFormat.format(page, message);
-		
-		return page;
-		
-	}
-
 }

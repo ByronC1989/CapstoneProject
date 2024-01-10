@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.group2.dao.ApplicationDao;
 import com.group2.dao.DaoProxy;
 import com.group2.services.ApplicationServices;
+import com.group2.services.HtmlManager;
 import com.group2.user.User;
 import com.group2.user.UserBuilder;
 
@@ -30,12 +31,15 @@ public class RegisterServlet extends HttpServlet {
 	//ApplicationDao dao = new ApplicationDao();  
 	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
+	// create instance of HtmlManager to write the html pages
+	HtmlManager html = new HtmlManager();
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		System.out.println("Inside Register Servlet doGet!");
 		
-		String page = getHTMLString(req.getServletContext().getRealPath("register.html"), " ");		
+		String page = html.getHTMLString(req.getServletContext().getRealPath("register.html"), " ");		
 		resp.getWriter().write(page);
 		
 	}
@@ -99,31 +103,8 @@ public class RegisterServlet extends HttpServlet {
 						
 		
 		// recreate html page inside of servlet
-		String page = getHTMLString(req.getServletContext().getRealPath("register.html"), message);		
+		String page = html.getHTMLString(req.getServletContext().getRealPath("register.html"), message);		
 		resp.getWriter().write(page);
 		
 	}
-	
-	// Display HTML page
-	public String getHTMLString(String filePath, String message) throws IOException {
-		// read html page file and display the page.
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		String line = "";
-		StringBuffer buffer = new StringBuffer();
-		
-		while((line = reader.readLine()) != null) {
-			buffer.append(line);
-		}
-		
-		reader.close();
-		
-		String page = buffer.toString();
-		
-		// Add content by replacing placeholder values in html page.
-		page = MessageFormat.format(page, message);
-		
-		return page;
-		
-	}
-
 }
