@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+	 <div class="login-container">
+	    <header>
+	        <h1 class="header-title">MediRecord -- Profile</h1>
+	    </header>
+	    
+	    <nav>
+	        <a href="index.html">Home</a>
+	        <a href="register">New User</a>
+	        <a href="login">Login</a>
+	        <a href="post">Post Record</a>
+	        <a href="records">Record Directory</a>
+	    </nav>
+	    
+	    <h2>Account Info:</h2>
+	    <p>Username: {0}</p>
+	    <p>First Name: {1}</p>
+	    <p>Last Name: {2}</p>
+	    
+	    <h2>Change Password</h2>
+	    <form class="login-form" action='register' method='post'>
+			<label for='current-password'>Current Password:</label>
+	        <input type='current-password' id='current-password' name='current-password' required><br>
+	       	
+	       	<label for='new-password'>New Password:</label>
+	        <input type='new-password' id='new-password' name='new-password' required><br>
+	        
+			<button type='submit'>Change Password</button>
+		</form>
+			  
+	    <h2>Change Email</h2>
+	    
+	    <form class="login-form" action='register' method='post'>
+	            
+			<label for='email'>Email:</label>
+	        <input type='text' id='email' name='email' value='{3}' required><br>
+	
+	        <button type='submit'>Change Email</button>
+	    </form>
+    </div>
+</body>
+</html>
