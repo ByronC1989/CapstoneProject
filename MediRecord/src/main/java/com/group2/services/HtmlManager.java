@@ -10,8 +10,7 @@ import com.group2.beans.Record;
 
 public class HtmlManager {
 	
-	// Display HTML page
-	public String getHTMLString(String filePath, String message) throws IOException {
+	private String htmlReader(String filePath) throws IOException {	
 		// read html page file and display the page.
 		BufferedReader reader = new BufferedReader(new FileReader(filePath));
 		String line = "";
@@ -24,28 +23,25 @@ public class HtmlManager {
 		reader.close();
 		
 		String page = buffer.toString();
+		
+		return page;		
+	}
+	
+	// Display HTML page
+	public String getHTMLString(String filePath, String message) throws IOException {
+		// retrieve page from html
+		String page = htmlReader(filePath);
 		
 		// Add content by replacing placeholder values in html page.
 		page = MessageFormat.format(page, message);
 		
-		return page;
-		
+		return page;		
 	}
-	
+		
 	// Display Record on HTML page
 	public String getHTMLresult(String filePath, List<Record> records) throws IOException {
-		// read html page file and display the page.
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		String line = "";
-		StringBuffer buffer = new StringBuffer();
-		
-		while((line = reader.readLine()) != null) {
-			buffer.append(line);
-		}
-		
-		reader.close();
-		
-		String page = buffer.toString();
+		// retrieve page from html
+		String page = htmlReader(filePath);
 		
 		// Add content by replacing placeholder values in html page.
 		// Add loop for List display
@@ -58,24 +54,13 @@ public class HtmlManager {
 	
 	// Hide Filler on HTML page
 	public String getHTMLString(String filePath) throws IOException {
-		// read html page file and display the page.
-		BufferedReader reader = new BufferedReader(new FileReader(filePath));
-		String line = "";
-		StringBuffer buffer = new StringBuffer();
-		
-		while((line = reader.readLine()) != null) {
-			buffer.append(line);
-		}
-		
-		reader.close();
-		
-		String page = buffer.toString();
+		// retrieve page from html
+		String page = htmlReader(filePath);
 		
 		// Add content by replacing placeholder values in html page.
 		page = MessageFormat.format(page, " ", " ", " ", " "," "," "," ");
 		
-		return page;
-		
+		return page;		
 	}
 	
 }
