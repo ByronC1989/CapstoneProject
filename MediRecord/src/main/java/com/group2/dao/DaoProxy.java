@@ -52,6 +52,11 @@ public class DaoProxy implements ApplicationServices {
 	public User selectUser(String username) {
 		return dao.selectUser(username);
 	}
+
+	@Override
+	public boolean updatePassword(String username, String password) {
+		return dao.updatePassword(username, password);
+	}
 	
 	
 }

@@ -174,6 +174,32 @@ public class ApplicationDao implements ApplicationServices{
 		
 	}
 	
+	public boolean updatePassword(String username, String password) {
+		boolean updated = false;
+		
+		String sql = "UPDATE users SET password =? WHERE username =?";
+		
+		try {
+			
+			java.sql.PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setString(1, password);
+			statement.setString(2, username);
+			
+			// get a count of the rows affected.
+			int affectedRows = statement.executeUpdate();
+			
+			// should only return 1 row and update the boolean value
+			if(affectedRows == 1) {
+				updated = true;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return updated;	
+	}
+	
 	
 	// adding patient record to the database.
 	public void createPost(Record record) {
