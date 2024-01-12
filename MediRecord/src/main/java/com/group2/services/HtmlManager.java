@@ -76,7 +76,7 @@ public class HtmlManager {
 				emailForm += "<button type='submit'>Change Email</button>";
 				emailForm += "</form>";
 		// Add content by replacing placeholder values in html page.
-		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), emailForm);
+		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), " ", " ", emailForm);
 		
 		return page;		
 	}
@@ -93,7 +93,7 @@ public class HtmlManager {
 				emailForm += "<button type='submit'>Change Email</button>";
 				emailForm += "</form>";
 		// Add content by replacing placeholder values in html page.
-		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), emailForm);
+		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), passMessage, emailMessage, emailForm);
 		
 		return page;		
 	}
