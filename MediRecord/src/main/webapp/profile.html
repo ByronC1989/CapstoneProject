@@ -12,6 +12,11 @@
 	        <h1 class="header-title">MediRecord -- Profile</h1>
 	    </header>
 	    
+	    <div align="right">
+			<a href="profile">Profile</a>
+			<a href="logout">Logout</a>
+		</div>
+		
 	    <nav>
 	        <a href="index.html">Home</a>
 	        <a href="register">New User</a>
@@ -26,6 +31,7 @@
 	    <p>Last Name: {2}</p>
 	    
 	    <h2>Change Password</h2>
+	    <p>{3}</p>
 	    <form class="login-form" action='profile' method='post'>
 			<label for='current-password'>Current Password:</label>
 	        <input type='password' id='current-password' name='current-password' required><br>
@@ -37,8 +43,8 @@
 		</form>
 			  
 	    <h2>Change Email</h2>
-	    
-	    {3}
+	    <p>{4}</p>
+	    {5}
 	    
 	    <!-- Is being prints from servlet
 	    <form class="login-form" action='register' method='post'>
