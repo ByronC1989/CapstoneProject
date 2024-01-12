@@ -7,6 +7,7 @@ import java.text.MessageFormat;
 import java.util.List;
 
 import com.group2.beans.Record;
+import com.group2.user.User;
 
 public class HtmlManager {
 	
@@ -62,5 +63,40 @@ public class HtmlManager {
 		
 		return page;		
 	}
+	
+	// Hide Filler on HTML page
+	public String getHTMLStringProfile(String filePath, User user) throws IOException {
+		// retrieve page from html
+		String page = htmlReader(filePath);
+		
+		// change email form
+		String emailForm = "<form class=\"login-form\" action='profile' method='post'>";
+				emailForm += "<label for='email'>Email:</label>";
+				emailForm += "<input type='text' id='email' name='email' value='" + user.getEmail() + "' required><br>";
+				emailForm += "<button type='submit'>Change Email</button>";
+				emailForm += "</form>";
+		// Add content by replacing placeholder values in html page.
+		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), emailForm);
+		
+		return page;		
+	}
+	
+	// Hide Filler on HTML page
+	public String getHTMLStringProfileResult(String filePath, User user, String passMessage, String emailMessage) throws IOException {
+		// retrieve page from html
+		String page = htmlReader(filePath);
+		
+		// change email form
+		String emailForm = "<form class=\"login-form\" action='profile' method='post'>";
+				emailForm += "<label for='email'>Email:</label>";
+				emailForm += "<input type='text' id='email' name='email' value='" + user.getEmail() + "' required><br>";
+				emailForm += "<button type='submit'>Change Email</button>";
+				emailForm += "</form>";
+		// Add content by replacing placeholder values in html page.
+		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), emailForm);
+		
+		return page;		
+	}
+	
 	
 }
