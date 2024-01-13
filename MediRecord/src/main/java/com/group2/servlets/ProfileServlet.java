@@ -69,23 +69,43 @@ public class ProfileServlet extends HttpServlet {
 		String newPassword =  req.getParameter("new-password");
 		String email =  req.getParameter("email");	
 		
+		// Retreive form function
+		String formPurpose = req.getParameter("function");
+		
 		// Store Error / Success messages
 		String passMessage = "";
 		String emailMessage = "";
 		
-		// verify username and password before updating password
-		if(daoProxy.verifyUsernamePassword(user.getUserName(), currentPassword)) {
+		System.out.println(formPurpose);
+		System.out.println(email);
+		
+		if(formPurpose.equals("passUpdate")) {
 			
-			if(daoProxy.updatePassword(user.getUserName(), newPassword)) {
-				// display successfully update message
-				passMessage = "Password succesfully updated!";
-				System.out.println("Password succesfully updated!");
+			// verify username and password before updating password
+			if(daoProxy.verifyUsernamePassword(user.getUserName(), currentPassword)) {
+				
+				if(daoProxy.updatePassword(user.getUserName(), newPassword)) {
+					// display successfully update message
+					passMessage = "Password updated!";
+					System.out.println(passMessage);
+				} 
+				
+			} else {
+				// display failed to password message
+				passMessage = "Password was incorrect";
+				System.out.println(passMessage);
+			}	
+			
+		} 
+
+		if(formPurpose.equals("emailUpdate")) {
+			
+			
+			if(daoProxy.updateEmail(user.getUserName(), email)) {
+				emailMessage = "Email updated!";
+				System.out.println(emailMessage);
 			}
-						
-		} else {
-			// display failed to password message
-			passMessage = "Password was incorrect";
-			System.out.println("Password was incorrect");
+			
 		}
 		
 		// Display html page from get request -- add passMessage and emailMessage to html page
