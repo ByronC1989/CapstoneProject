@@ -69,15 +69,12 @@ public class HtmlManager {
 		// retrieve page from html
 		String page = htmlReader(filePath);
 		
-		// change email form
-		String emailForm = "<form class=\"login-form\" action='profile' method='post'>";
-				emailForm += "<label for='email'>Email:</label>";
-				emailForm += "<input type='text' id='email' name='email' value='" + user.getEmail() + "' required><br>";
-				emailForm += "<button type='submit'>Change Email</button>";
-				emailForm += "</form>";
-		// Add content by replacing placeholder values in html page.
-		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), " ", " ", emailForm);
-		
+		if(user != null) {
+			
+			// Add content by replacing placeholder values in html page.
+			page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), " ", " ");
+			
+		}
 		return page;		
 	}
 	
@@ -86,14 +83,8 @@ public class HtmlManager {
 		// retrieve page from html
 		String page = htmlReader(filePath);
 		
-		// change email form
-		String emailForm = "<form class=\"login-form\" action='profile' method='post'>";
-				emailForm += "<label for='email'>Email:</label>";
-				emailForm += "<input type='text' id='email' name='email' value='" + user.getEmail() + "' required><br>";
-				emailForm += "<button type='submit'>Change Email</button>";
-				emailForm += "</form>";
 		// Add content by replacing placeholder values in html page.
-		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), passMessage, emailMessage, emailForm);
+		page = MessageFormat.format(page, user.getUserName(), user.getFirstName(), user.getLastName(), passMessage, emailMessage);
 		
 		return page;		
 	}
