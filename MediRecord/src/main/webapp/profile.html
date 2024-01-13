@@ -32,6 +32,7 @@
 	    
 	    <h2>Change Password</h2>
 	    <p>{3}</p>
+	    
 	    <form class="login-form" action='profile' method='post'>
 			<label for='current-password'>Current Password:</label>
 	        <input type='password' id='current-password' name='current-password' required><br>
@@ -39,12 +40,23 @@
 	       	<label for='new-password'>New Password:</label>
 	        <input type='password' id='new-password' name='new-password' required><br>
 	        
+	        <input type="hidden" name="function" value="passUpdate">
+	        
 			<button type='submit'>Change Password</button>
 		</form>
 			  
 	    <h2>Change Email</h2>
 	    <p>{4}</p>
-	    {5}
+	    
+	    <form class="login-form" action='profile' method='post'>
+			<label for='email'>Email:</label>
+	        <input type='text' id='email' name='email' required><br>
+	               
+	        <input type="hidden" name="function" value="emailUpdate">
+	        
+			<button type='submit'>Change Email</button>
+		</form>
+
 	    
 	    <!-- Is being prints from servlet
 	    <form class="login-form" action='register' method='post'>
