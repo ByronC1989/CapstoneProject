@@ -76,3 +76,27 @@ nav a {
 nav a:hover {
     color: #004d40; 
 }
+
+.logout-container {
+	text-align: center;
+	margin-top: 20px;
+}
+
+.logout-container a {
+	margin: 0 10px;
+	text-decoration: none;
+	color: #00a692;
+	font-weight: bold;
+	padding: 8px 16px;
+	border: 1px solid #00a692;
+	border-radius: 4px;
+	background-color: #00a692;
+	color: #fff;
+	
+}
+
+.logout-container a:hover {
+	background-color: #004d40;
+	color: #fff;
+	border: 1px solid #004d40;
+}
