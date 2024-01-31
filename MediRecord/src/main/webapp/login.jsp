@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +22,8 @@
 		</nav>
 
         <h2>User Login</h2>
-
-        <em>{0}</em><br><br>
+		<% String message = (String)request.getAttribute("message"); %>
+        <em><%=message %></em><br><br>
 
         <form class="login-form" action='login' method='post'>
             <label for='username'>Username:</label>

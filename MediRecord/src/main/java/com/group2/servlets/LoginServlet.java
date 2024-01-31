@@ -35,10 +35,15 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		System.out.println("Inside Login Servlet doGet!");
+		String message= "";
 		
+		// no longer needed when using JSP
 		// Display html page from get request
-		String page = html.getHTMLString(req.getServletContext().getRealPath("login.html"), " ");		
-		resp.getWriter().write(page);
+//		String page = html.getHTMLString(req.getServletContext().getRealPath("login.html"), " ");		
+//		resp.getWriter().write(page);
+		
+		req.setAttribute("message", message);
+		req.getRequestDispatcher("/login.jsp").forward(req, resp);
 		
 	}
 	
@@ -76,9 +81,13 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		
+		// no longer needed when using JSP
 		// Display html page from post request
-		String page = html.getHTMLString(req.getServletContext().getRealPath("login.html"), message);		
-		resp.getWriter().write(page);
+//		String page = html.getHTMLString(req.getServletContext().getRealPath("login.html"), message);		
+//		resp.getWriter().write(page);
+		
+		req.setAttribute("message", message);
+		req.getRequestDispatcher("/login.jsp").forward(req, resp);
 	}
 	
 }
