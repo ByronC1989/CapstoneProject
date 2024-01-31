@@ -27,19 +27,25 @@ public class RegisterServlet extends HttpServlet {
 	//ApplicationDao dao = new ApplicationDao();  
 	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
+	// no longer needed after converting to JSP
 	// create instance of HtmlManager to write the html pages
-	HtmlManager html = new HtmlManager();
+//	HtmlManager html = new HtmlManager();
 	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		System.out.println("Inside Register Servlet doGet!");
 		
+		String message = "";
 		
 		
-		
+		// no longer needed after converting to JSP
 //		String page = html.getHTMLString(req.getServletContext().getRealPath("register.jsp"), " ");		
 //		resp.getWriter().write(page);
+		
+		// store message data to display error or success.
+		req.setAttribute("message", message);
+		req.getRequestDispatcher("/register.jsp").forward(req, resp);
 		
 	}
 	
@@ -79,6 +85,8 @@ public class RegisterServlet extends HttpServlet {
 			
 		} else {
 			
+			message = "User succesfully added!";
+			
 			// create user
 			
 			// No longer needed using builder pattern
@@ -99,8 +107,16 @@ public class RegisterServlet extends HttpServlet {
 			daoProxy.createUser(userbuild);
 			
 		}
+		
+//		// store message data to display error or success.
+		req.setAttribute("message", message);
+//		// send data to jsp page.
+		req.getRequestDispatcher("/register.jsp").forward(req, resp);
+		
+//		doGet(req, resp);
 						
 		
+		// no longer needed after converting to JSP
 		// recreate html page inside of servlet
 //		String page = html.getHTMLString(req.getServletContext().getRealPath("register.jsp"), message);		
 //		resp.getWriter().write(page);

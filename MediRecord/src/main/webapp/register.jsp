@@ -22,8 +22,8 @@
 		</nav>
 
         <h2>User Registration</h2>
-
-        <em></em><br><br>
+		<% String message = (String)request.getAttribute("message"); %>
+        <em><%=message %></em><br><br>
 
         <form class="login-form" action='register' method='post'>
             <label for='username'>Username:</label>
