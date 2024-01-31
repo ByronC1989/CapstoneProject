@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +23,9 @@
 		</nav>
 
         <h2>New Patient Record</h2>
-
-        <em>{0}</em><br><br>
+        
+		<% String message = (String)request.getAttribute("message"); %>
+        <em><%=message %></em><br><br>
 
         <form class="login-form" action='post' method='post'>
             <label for='healthcard'>Health Card #:</label>

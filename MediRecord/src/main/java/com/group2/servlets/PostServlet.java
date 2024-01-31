@@ -31,21 +31,31 @@ public class PostServlet extends HttpServlet {
 	// create instance of HtmlManager to write the html pages
 	HtmlManager html = new HtmlManager();
 	
+	String message= " ";
+	
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		// Servlet for handling Posting Records
-		System.out.println("Inside Post Servlet doGet method");
 		
 		// manage sessions informations for access
 		HttpSession session = req.getSession();
 		if(session.getAttribute("User")==null) {
 			resp.sendRedirect("login");
+		} else {
+			
+			// Servlet for handling Posting Records
+			System.out.println("Inside Post Servlet doGet method");
+			
+			// no longer needed when using JSP
+			// Display html page from get request
+//			String page = html.getHTMLString(req.getServletContext().getRealPath("post.html"), " ");		
+//			resp.getWriter().write(page);
+			
+			req.setAttribute("message", message);
+			req.getRequestDispatcher("/post.jsp").forward(req, resp);
+			
 		}
 		
-		// Display html page from get request
-		String page = html.getHTMLString(req.getServletContext().getRealPath("post.html"), " ");		
-		resp.getWriter().write(page);
 	}
 	
 	@Override
@@ -61,7 +71,6 @@ public class PostServlet extends HttpServlet {
 		String diagnoses = req.getParameter("diagnoses");
 		
 		// message to be displayed on success or error
-		String message = "";
 		
 		// add health card validation --- check if health card already exists in the system
 		if(!daoProxy.verifyRecord(healthCard)) {
@@ -86,9 +95,12 @@ public class PostServlet extends HttpServlet {
 			message = "Health Card already exists";
 		}
 		
-		
+		// no longer needed when using JSP
 		// Display html page from post request
-		String page = html.getHTMLString(req.getServletContext().getRealPath("post.html"), message);		
-		resp.getWriter().write(page);
+//		String page = html.getHTMLString(req.getServletContext().getRealPath("post.html"), message);		
+//		resp.getWriter().write(page);
+			
+				
+		doGet(req, resp);
 	}
 }
