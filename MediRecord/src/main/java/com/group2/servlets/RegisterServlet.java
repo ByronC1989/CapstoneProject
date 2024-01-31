@@ -35,8 +35,11 @@ public class RegisterServlet extends HttpServlet {
 		
 		System.out.println("Inside Register Servlet doGet!");
 		
-		String page = html.getHTMLString(req.getServletContext().getRealPath("register.html"), " ");		
-		resp.getWriter().write(page);
+		
+		
+		
+//		String page = html.getHTMLString(req.getServletContext().getRealPath("register.jsp"), " ");		
+//		resp.getWriter().write(page);
 		
 	}
 	
@@ -99,8 +102,8 @@ public class RegisterServlet extends HttpServlet {
 						
 		
 		// recreate html page inside of servlet
-		String page = html.getHTMLString(req.getServletContext().getRealPath("register.html"), message);		
-		resp.getWriter().write(page);
+//		String page = html.getHTMLString(req.getServletContext().getRealPath("register.jsp"), message);		
+//		resp.getWriter().write(page);
 		
 	}
 }

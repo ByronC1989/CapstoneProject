@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +23,7 @@
 
         <h2>User Registration</h2>
 
-        <em>{0}</em><br><br>
+        <em></em><br><br>
 
         <form class="login-form" action='register' method='post'>
             <label for='username'>Username:</label>
