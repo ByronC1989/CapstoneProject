@@ -29,7 +29,7 @@ public class LoginServlet extends HttpServlet {
 	//ApplicationDao dao = new ApplicationDao();
 	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
-	String redirection;
+	String redirection = "";
 	
 	// create instance of HtmlManager to write the html pages
 	HtmlManager html = new HtmlManager();
@@ -85,21 +85,30 @@ public class LoginServlet extends HttpServlet {
 			System.out.println("Failed to Login!");
 		}
 		
-		if(redirection.equals("records")) {
-			RequestDispatcher rd = req.getRequestDispatcher("records");
-			rd.forward(req, resp);
+		if(redirection == null) {
+			
+			// no longer needed when using JSP
+			// Display html page from post request
+//			String page = html.getHTMLString(req.getServletContext().getRealPath("login.html"), message);		
+//			resp.getWriter().write(page);
+			
+			req.setAttribute("message", message);
+			req.getRequestDispatcher("/login.jsp").forward(req, resp);
+			
 		} else if(redirection.equals("post")) {
+			
 			RequestDispatcher rd = req.getRequestDispatcher("post");
 			rd.forward(req, resp);
+			
+		} else if(redirection.equals("records")) {
+			
+			RequestDispatcher rd = req.getRequestDispatcher("records");
+			rd.forward(req, resp);
+			
+			
 		}
 		
-		// no longer needed when using JSP
-		// Display html page from post request
-//		String page = html.getHTMLString(req.getServletContext().getRealPath("login.html"), message);		
-//		resp.getWriter().write(page);
-		
-		req.setAttribute("message", message);
-		req.getRequestDispatcher("/login.jsp").forward(req, resp);
+
 	}
 	
 }
