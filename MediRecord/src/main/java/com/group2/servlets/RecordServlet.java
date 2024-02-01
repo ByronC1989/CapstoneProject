@@ -27,6 +27,9 @@ public class RecordServlet extends HttpServlet{
 	//ApplicationDao dao = new ApplicationDao();
 	ApplicationServices daoProxy = new DaoProxy();	// Added proxy pattern to access DAO
 	
+	String message = "";
+	Record record = null;
+	
 	// create instance of HtmlManager to write the html pages
 	HtmlManager html = new HtmlManager();
 	
@@ -40,11 +43,26 @@ public class RecordServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		if(session.getAttribute("User")==null) {
 			resp.sendRedirect("login");
+		} else {
+			
+			if (record != null ) {
+				req.setAttribute("healthCard", record.getHealthCardID());
+				req.setAttribute("firstName", record.getFirstName());
+				req.setAttribute("lastName", record.getLastName());
+				req.setAttribute("gender", record.getGender());
+				req.setAttribute("dob", record.getDateOfBirth());
+				req.setAttribute("allergies", record.getAllergies());
+				req.setAttribute("diagnoses", record.getDiagnoses());
+			}
+			
+			req.setAttribute("message", message);
+			req.getRequestDispatcher("/patientrecord.jsp").forward(req, resp);
+			
 		}
 				
 		// Display html page from get request
-		String page = html.getHTMLString(req.getServletContext().getRealPath("patientrecord.html"));	
-		resp.getWriter().write(page);
+//		String page = html.getHTMLString(req.getServletContext().getRealPath("patientrecord.jsp"));	
+//		resp.getWriter().write(page);
 	}
 	
 	
@@ -57,24 +75,31 @@ public class RecordServlet extends HttpServlet{
 		if(daoProxy.verifyRecord(searchString)) {
 			
 			// Might not need a List to hold records.
-			List<Record> records = daoProxy.searchRecords(searchString);		
+//			List<Record> records = daoProxy.searchRecords(searchString);
 			
-			System.out.println(searchString);
+			record = daoProxy.selectRecord(searchString);
 			
-			System.out.println(records.toString());
+			req.setAttribute("record", record);
+			message = "";
+			
+			System.out.println(searchString);			
+//			System.out.println(records.toString());
 			
 			// Display html page from post request
-			String page = html.getHTMLresult(req.getServletContext().getRealPath("patientrecord.html"), records);	
-			resp.getWriter().write(page);
+//			String page = html.getHTMLresult(req.getServletContext().getRealPath("patientrecord.jsp"), records);	
+//			resp.getWriter().write(page);
 			
 		} else {
 			
 			System.out.println("No record found!");
+			message = "No record found!";
 			
 			// Display html page from get request
-			String page = html.getHTMLString(req.getServletContext().getRealPath("patientrecord.html"));	
-			resp.getWriter().write(page);
+//			String page = html.getHTMLString(req.getServletContext().getRealPath("patientrecord.jsp"));	
+//			resp.getWriter().write(page);
 		}
-			
+		
+		doGet(req, resp);		
 	}
+	
 }
