@@ -289,10 +289,8 @@ public class ApplicationDao implements ApplicationServices{
 		} catch(SQLException e) {
 			e.printStackTrace();
 		}
-
 		
-		return records;
-		
+		return records;		
 	}
 	
 	// check if a record exists in the system.
@@ -322,6 +320,39 @@ public class ApplicationDao implements ApplicationServices{
 		
 		return match;
 		
+	}
+	
+	// search for patient record to be displayed
+	public Record selectRecord(String search){
+		Record record = null;
+		
+		try {
+			String sql = "SELECT * FROM records WHERE HealthcardID=" + search;
+			
+			Statement statement = connection.createStatement();
+			
+			statement.executeQuery(sql);
+			
+			ResultSet set = statement.executeQuery(sql);
+			
+			
+			while(set.next()) {
+				// create record object from database
+				record = new Record();
+				record.setHealthCardID(set.getString("HealthcardID"));
+				record.setFirstName(set.getString("FirstName"));
+				record.setLastName(set.getString("LastName"));
+				record.setGender(set.getString("Gender"));
+				record.setDateOfBirth(set.getString("DateOfBirth"));
+				record.setAllergies(set.getString("Allergies"));
+				record.setDiagnoses(set.getString("Diagnoses"));
+				
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}		
+		return record;		
 	}
 
 }

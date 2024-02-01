@@ -62,6 +62,11 @@ public class DaoProxy implements ApplicationServices {
 	public boolean updateEmail(String username, String email) {
 		return dao.updateEmail(username, email);
 	}
+
+	@Override
+	public Record selectRecord(String search) {
+		return dao.selectRecord(search);
+	}
 	
 	
 }
