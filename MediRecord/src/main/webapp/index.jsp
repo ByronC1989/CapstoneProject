@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,10 +20,14 @@
         <a href="post">Post Record</a>
         <a href="records">Record Directory</a>
     </nav>
-    	
+    
+    <%
+    if(session.getAttribute("User") != null ) { 
+    %>	
     <div class = logout-container>
 		<a href="profile">Profile</a>
 		<a href="logout">Logout</a>
 	</div>
+	<%} %>
 </body>
 </html>

@@ -46,12 +46,15 @@
 
             <button type='submit'>Register User!</button>
         </form>
-       
+
+    <%
+    if(session.getAttribute("User") != null ) { 
+    %>	       
         <div class = logout-container>
 		<a href="profile">Profile</a>
 		<a href="logout">Logout</a>
 		</div>
-		
+	<%} %>		
     </div>
 </body>
 </html>

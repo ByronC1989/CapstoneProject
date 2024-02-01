@@ -62,9 +62,13 @@
 			<button type='submit'>Change Email</button>
 		</form>
     </div>
-    
+
+    <%
+    if(session.getAttribute("User") != null ) { 
+    %>	    
      <div class = logout-container>
 		<a href="logout">Logout</a>
 	</div>
+	<%} %>
 </body>
 </html>
