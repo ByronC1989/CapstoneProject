@@ -3,6 +3,7 @@ package com.group2.servlets;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,8 +42,15 @@ public class RecordServlet extends HttpServlet{
 		
 		// manage sessions informations for access
 		HttpSession session = req.getSession();
-		if(session.getAttribute("User")==null) {
-			resp.sendRedirect("login");
+		if(session.getAttribute("User")==null) {		
+			
+			// redirect user to login page if not logged in.
+			req.setAttribute("redirect", "records");
+			RequestDispatcher rd = req.getRequestDispatcher("login");
+			rd.forward(req, resp);
+			
+			// updated to requestDispatcher
+//			resp.sendRedirect("login");
 		} else {
 			
 			if (record != null ) {

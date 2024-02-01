@@ -3,6 +3,7 @@ package com.group2.servlets;
 import java.io.IOException;
 import java.sql.Date;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -40,7 +41,14 @@ public class PostServlet extends HttpServlet {
 		// manage sessions informations for access
 		HttpSession session = req.getSession();
 		if(session.getAttribute("User")==null) {
-			resp.sendRedirect("login");
+			
+			// redirect user to login page if not logged in.
+			req.setAttribute("redirect", "post");
+			RequestDispatcher rd = req.getRequestDispatcher("login");
+			rd.forward(req, resp);
+			
+			// updated to requestDispatcher
+//			resp.sendRedirect("login");
 		} else {
 			
 			// Servlet for handling Posting Records
@@ -74,7 +82,6 @@ public class PostServlet extends HttpServlet {
 		
 		// add health card validation --- check if health card already exists in the system
 		if(!daoProxy.verifyRecord(healthCard)) {
-			message = "Success!";
 			
 			// create a creation date
 			long currentTime = System.currentTimeMillis();
