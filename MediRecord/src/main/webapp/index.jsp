@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,21 +13,12 @@
         <h1 class="header-title">Welcome to MediRecord</h1>
     </header>
     
-    <nav>
-        <a href="index.jsp">Home</a>
-        <a href="register">New User</a>
-        <a href="login">Login</a>
-        <a href="post">Post Record</a>
-        <a href="records">Record Directory</a>
-    </nav>
+    <%@ include file="header.jsp" %>
     
     <%
     if(session.getAttribute("User") != null ) { 
     %>	
-    <div class = logout-container>
-		<a href="profile">Profile</a>
-		<a href="logout">Logout</a>
-	</div>
+		<%@ include file="footer.jsp" %>
 	<%} %>
 </body>
 </html>

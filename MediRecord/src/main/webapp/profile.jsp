@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,13 +14,8 @@
 	        <h1 class="header-title">MediRecord -- Profile</h1>
 	    </header>
 	    
-	    <nav>
-	        <a href="index.jsp">Home</a>
-	        <a href="register">New User</a>
-	        <a href="login">Login</a>
-	        <a href="post">Post Record</a>
-	        <a href="records">Record Directory</a>
-	    </nav>
+  	  <%@ include file="header.jsp" %>
+  	  
 	    <% 
 	    	String username = (String)request.getAttribute("username");
 	    	String firstName = (String)request.getAttribute("firstName");
@@ -61,14 +56,15 @@
 	        
 			<button type='submit'>Change Email</button>
 		</form>
-    </div>
-
-    <%
+		
+	<%
     if(session.getAttribute("User") != null ) { 
-    %>	    
-     <div class = logout-container>
-		<a href="logout">Logout</a>
-	</div>
+    %>	 
+       
+		<%@ include file="footer.jsp" %>
+		
 	<%} %>
+		
+    </div>
 </body>
 </html>

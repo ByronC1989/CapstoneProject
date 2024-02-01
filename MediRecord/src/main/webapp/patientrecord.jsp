@@ -12,13 +12,8 @@
         <img src="logo.png" alt="MediRecord Logo" class="logo">
         <h1>MediRecord</h1>
         
-        <nav>
-			<a href="index.jsp">Home</a>
-			<a href="register">New User</a>
-			<a href="login">Login</a>
-			<a href="post">Post Record</a>
-			<a href="records">Record Directory</a>
-		</nav>
+  	  <%@ include file="header.jsp" %>
+  	  
 		<%
 		String message = (String) request.getAttribute("message");
 		String healthCard = (String) request.getAttribute("healthCard");
@@ -52,15 +47,14 @@
         <h4>Diagnoses</h4>
         <p><%= diagnoses %></p>	
         <%} %>
-    </div>
-    
+        
     <%
     if(session.getAttribute("User") != null ) { 
     %>	
-    <div class="logout-container">
-		<a href="profile">Profile</a>
-		<a href="logout">Logout</a>
-	</div>
-	<%} %>	
+		<%@ include file="footer.jsp" %>
+	<%} %>
+   
+    </div>
+    
 </body>
 </html>
