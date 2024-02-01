@@ -15,7 +15,7 @@
         
         
         <nav>
-			<a href="index.html">Home</a>
+			<a href="index.jsp">Home</a>
 			<a href="register">New User</a>
 			<a href="login">Login</a>
 			<a href="post">Post Record</a>

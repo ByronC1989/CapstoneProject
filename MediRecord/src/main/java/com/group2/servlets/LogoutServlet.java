@@ -29,7 +29,7 @@ public class LogoutServlet extends HttpServlet {
 		session.invalidate();
 		
 		// after logging out redirect back to index.
-		resp.sendRedirect("index.html");		
+		resp.sendRedirect("index.jsp");		
 	}
 
 }
