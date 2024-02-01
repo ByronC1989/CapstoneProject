@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,21 +21,29 @@
 	        <a href="post">Post Record</a>
 	        <a href="records">Record Directory</a>
 	    </nav>
+	    <% 
+	    	String username = (String)request.getAttribute("username");
+	    	String firstName = (String)request.getAttribute("firstName");
+	    	String lastName = (String)request.getAttribute("lastName");
+	    	String passMessage = (String)request.getAttribute("passMessage");
+	    	String emailMessage = (String)request.getAttribute("emailMessage");
+	    	String email = (String)request.getAttribute("email");
+	   	%>
 	    
 	    <h2>Account Info:</h2>
-	    <p>Username: {0}</p>
-	    <p>First Name: {1}</p>
-	    <p>Last Name: {2}</p>
+	    <p>Username: <%=username %></p>
+	    <p>First Name: <%=firstName %></p>
+	    <p>Last Name: <%=lastName %></p>
 	    
 	    <h2>Change Password</h2>
-	    <p>{3}</p>
+	    <p><%=passMessage %></p>
 	    
 	    <form class="login-form" action='profile' method='post'>
 			<label for='current-password'>Current Password:</label>
-	        <input type='password' id='current-password' name='current-password' required><br>
+	        <input type='password' id='current-password' name='current-password' placeholder='Enter current password...' required><br>
 	       	
 	       	<label for='new-password'>New Password:</label>
-	        <input type='password' id='new-password' name='new-password' required><br>
+	        <input type='password' id='new-password' name='new-password' placeholder='Enter new password...' required><br>
 	        
 	        <input type="hidden" name="function" value="passUpdate">
 	        
@@ -41,27 +51,16 @@
 		</form>
 			  
 	    <h2>Change Email</h2>
-	    <p>{4}</p>
+	    <p><%=emailMessage %></p>
 	    
 	    <form class="login-form" action='profile' method='post'>
 			<label for='email'>Email:</label>
-	        <input type='text' id='email' name='email' required><br>
+	        <input type='text' id='email' name='email' placeholder='<%=email %>' required><br>
 	               
 	        <input type="hidden" name="function" value="emailUpdate">
 	        
 			<button type='submit'>Change Email</button>
 		</form>
-
-	    
-	    <!-- Is being prints from servlet
-	    <form class="login-form" action='register' method='post'>
-	            
-			<label for='email'>Email:</label>
-	        <input type='text' id='email' name='email' value='{3}' required><br>
-	
-	        <button type='submit'>Change Email</button>
-	    </form>
-	    -->
     </div>
     
      <div class = logout-container>
